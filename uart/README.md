@@ -40,7 +40,7 @@
 | UART\_CR   | 0x30   | Control Register (UART Enable, TX/RX Enable 등) |
 | UART\_ICR  | 0x44   | Interrupt Clear Register                        |
 
-## 4. 코드 동작 분석
+## 4. 코드 동작
 
 ### `my_uart3_init()`
 
