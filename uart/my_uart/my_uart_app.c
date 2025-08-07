@@ -25,10 +25,8 @@ int main()
         return 1;
     }
 
-    // 약간의 지연 (상대방 응답 기다림, 필요시 더 늘릴 수 있음)
     usleep(10000);
 
-    // read
     int len = read(fd, recv, sizeof(recv) - 1);
     if (len < 0)
     {
