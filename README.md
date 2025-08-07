@@ -2,4 +2,4 @@
 Linux BSP study
 
 
-- [uart](uart/my_uart/)
+- [uart](uart/)
