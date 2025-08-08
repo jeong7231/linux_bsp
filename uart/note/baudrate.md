@@ -66,8 +66,6 @@ writel(ibrd, uart3_base + UART_IBRD); // 정수부
 writel(fbrd, uart3_base + UART_FBRD); // 소수부
 ```
 
-이렇게 하면 UART가 원하는 속도로 동작합니다.
-
 ## 5. 참고 (다른 보레이트 예시)
 
 * **9600bps**
