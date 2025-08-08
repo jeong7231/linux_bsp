@@ -1,5 +1,5 @@
 APP := my_uart3_app
-MOD := my_uart3
+MOD := my_uart3_dev
 SRC := $(APP).c
 obj-m := $(MOD).o
 

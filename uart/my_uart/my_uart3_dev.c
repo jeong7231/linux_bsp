@@ -1,18 +1,27 @@
-#include <linux/module.h>
-#include <linux/kernel.h>
 #include <linux/fs.h>
 #include <linux/init.h>
 #include <linux/io.h>
+#include <linux/kernel.h>
+#include <linux/module.h>
 #include <linux/uaccess.h>
 
 #define DEVICE_NAME "my_uart3"
-#define UART3_BASE_PHYS 0xFE201600
+#define UART3_BASE_PHYS 0xFE201600 // BCM2711 PL011 UART3 base address, bus address : 0x7e201600
 #define UART3_REG_SIZE 0x90
+
+#define CALC_IBRD(baud) ((UARTCLK) / (16 * (baud)))
+#define CALC_FBRD(baud) ((((UARTCLK) % (16 * (baud))) * 64 + ((baud) / 2)) / (baud))
+
+#define UARTCLK 48000000 // rpi4 default setting
+#define BAUDRATE 115200
 
 static void __iomem *uart3_base;
 static int major = -1;
 
-// PL011 UART 레지스터 오프셋
+unsigned int ibrd = CALC_IBRD(BAUDRATE);
+unsigned int fbrd = CALC_FBRD(BAUDRATE);
+
+// PL011 UART registers offset
 #define UART_DR 0x00
 #define UART_FR 0x18
 #define UART_IBRD 0x24
@@ -21,10 +30,10 @@ static int major = -1;
 #define UART_CR 0x30
 #define UART_ICR 0x44
 
-#define UART_FR_TXFF (1 << 5)
-#define UART_FR_RXFE (1 << 4)
+#define UART_FR_TXFF (1 << 5) // Transmit FIFO Full
+#define UART_FR_RXFE (1 << 4) // Receive FIFO Empty
 
-// --- open: UART3 하드웨어 초기화 ---
+// UART3 초기화
 static int my_uart3_open(struct inode *inode, struct file *file)
 {
     // 1. UART Disable
@@ -34,8 +43,11 @@ static int my_uart3_open(struct inode *inode, struct file *file)
     writel(0x7FF, uart3_base + UART_ICR);
 
     // 3. Baudrate: 115200 @ 48MHz UARTCLK
-    writel(26, uart3_base + UART_IBRD);
-    writel(3, uart3_base + UART_FBRD);
+    // writel(26, uart3_base + UART_IBRD);
+    // writel(3,  uart3_base + UART_FBRD);
+
+    writel(ibrd, uart3_base + UART_IBRD);
+    writel(fbrd, uart3_base + UART_FBRD);
 
     // 4. FIFO enable, 8bit, no parity, 1 stop
     writel((1 << 4) | (3 << 5), uart3_base + UART_LCRH);
@@ -57,6 +69,7 @@ static ssize_t my_uart3_write(struct file *file, const char __user *buf, size_t 
         if (copy_from_user(&ch, buf + i, 1))
             return -EFAULT;
 
+        // TX FIFO Full이면 대기
         while (readl(uart3_base + UART_FR) & UART_FR_TXFF)
             cpu_relax();
 
@@ -75,6 +88,7 @@ static ssize_t my_uart3_read(struct file *file, char __user *buf, size_t count, 
 
     for (i = 0; i < count; i++)
     {
+        // RX FIFO Empty면 즉시 break (논블로킹)
         if (readl(uart3_base + UART_FR) & UART_FR_RXFE)
             break;
         kbuf[i] = readl(uart3_base + UART_DR) & 0xFF;
@@ -133,4 +147,4 @@ module_exit(my_uart3_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("JTY");
-MODULE_DESCRIPTION("uart3 device driver for bcm2711");
+MODULE_DESCRIPTION("Bare-metal PL011 UART3 driver for BCM2711 (Raspberry Pi4)");
