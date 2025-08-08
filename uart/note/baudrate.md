@@ -20,12 +20,9 @@ $$
 
    * 예) UARTCLK=48,000,000, Baudrate=115200
 
-   $$
-   \boxed{
-   \text{BaudDiv} = \frac{48,000,000}{16 \times 115,200} = \frac{48,000,000}{1,843,200} \approx 26.0416667
-   }
-   $$
-   
+$$
+\text{BaudDiv} = \frac{48,000,000}{16 \times 115,200} = \frac{48,000,000}{1,843,200} \approx 26.0416667
+$$
 
 2. **정수부**는 `IBRD`(Integer Baud Rate Divisor)
 
@@ -35,11 +32,9 @@ $$
 
    * FBRD 계산 공식:
 
-   $$
-   \boxed{
-   \text{FBRD} = \text{int}\left( (\text{BaudDiv 소수부}) \times 64 + 0.5 \right)
-   }
-   $$
+$$
+\text{FBRD} = \text{int}\left( (\text{BaudDiv 소수부}) \times 64 + 0.5 \right)
+$$
 
    * 위 예시에서 소수부는 0.0416667
    * FBRD = int(0.0416667 × 64 + 0.5) = int(2.6667 + 0.5) = int(3.1667) = 3
