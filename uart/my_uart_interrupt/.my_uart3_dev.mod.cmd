@@ -1,0 +1,1 @@
+savedcmd_/home/ubuntu/jeong_ws/linux_bsp_study/uart/my_uart_interrupt/my_uart3_dev.mod := printf '%s\n'   my_uart3_dev.o | awk '!x[$$0]++ { print("/home/ubuntu/jeong_ws/linux_bsp_study/uart/my_uart_interrupt/"$$0) }' > /home/ubuntu/jeong_ws/linux_bsp_study/uart/my_uart_interrupt/my_uart3_dev.mod

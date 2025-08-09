@@ -1,0 +1,1 @@
+savedcmd_/home/ubuntu/jeong_ws/linux_bsp_study/uart/my_uart_interrupt/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/ubuntu/jeong_ws/linux_bsp_study/uart/my_uart_interrupt/Module.symvers -T /home/ubuntu/jeong_ws/linux_bsp_study/uart/my_uart_interrupt/modules.order -i Module.symvers -e 
