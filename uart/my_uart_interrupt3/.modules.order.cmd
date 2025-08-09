@@ -1,1 +1,0 @@
-savedcmd_/home/ubuntu/jeong_ws/linux_bsp_study/uart/my_uart_interrupt3/modules.order := {   echo /home/ubuntu/jeong_ws/linux_bsp_study/uart/my_uart_interrupt3/my_uart3_dev.o; :; } > /home/ubuntu/jeong_ws/linux_bsp_study/uart/my_uart_interrupt3/modules.order
