@@ -254,4 +254,4 @@ module_exit(my_uart3_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("JTY");
-MODULE_DESCRIPTION("Interrupt-driven PL011 UART3 driver for BCM2711 (Raspberry Pi 4)");
+MODULE_DESCRIPTION("Interrupt-based PL011 UART3 driver for BCM2711 (Raspberry Pi4)");
