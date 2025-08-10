@@ -12,7 +12,7 @@ int main() {
         return 1;
     }
 
-    char send[] = "uart test\n";
+    char send[] = "my_uart3 TEST\n";
     char recv[100] = {0};
 
     // write
