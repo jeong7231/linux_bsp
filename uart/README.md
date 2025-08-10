@@ -1,4 +1,5 @@
-# uart3 device driver
+# UART
 
-- [register](note/register.md)
 - [baudrate](note/baudrate.md)
+- [interrupt](note/interrupt.md)
+- [workflow](note/workflow.md)
