@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: GPL-2.0
 #include <linux/fs.h>
 #include <linux/init.h>
 #include <linux/io.h>
@@ -303,5 +302,5 @@ module_init(my_uart3_init);
 module_exit(my_uart3_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("JTY, revised");
+MODULE_AUTHOR("jeong7231");
 MODULE_DESCRIPTION("Interrupt-based PL011 UART3 driver for BCM2711 (Raspberry Pi 4)");
