@@ -1,5 +1,5 @@
-# linux_bsp_study
-Linux BSP study
+# linux_bsp
+Linux BSP
 
 
 - [uart](uart/)
