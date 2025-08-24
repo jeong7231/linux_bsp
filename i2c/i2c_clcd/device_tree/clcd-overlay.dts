@@ -1,0 +1,27 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2711";
+    fragment@0 {
+        target = <&i2c1>;
+        __overlay__ {
+            status = "okay";
+            clcd@27 {
+                compatible = "my-i2c,pcf8574-hd44780";
+                reg = <0x27>;
+                rows = <2>;
+                cols = <16>;
+                rs-bit = <0>;
+                rw-bit = <1>;
+                en-bit = <2>;
+                d4-bit = <4>;
+                d5-bit = <5>;
+                d6-bit = <6>;
+                d7-bit = <7>;
+                bl-bit = <3>;   // (혹은 4, 실제 모듈과 맞게)
+                bl-active-high;
+            };
+        };
+    };
+};

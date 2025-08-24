@@ -1,0 +1,1 @@
+savedcmd_/home/ubuntu/jeong_ws/linux_bsp_study/i2c/i2c_clcd/driver_app/i2c_clcd_dev.mod := printf '%s\n'   i2c_clcd_dev.o | awk '!x[$$0]++ { print("/home/ubuntu/jeong_ws/linux_bsp_study/i2c/i2c_clcd/driver_app/"$$0) }' > /home/ubuntu/jeong_ws/linux_bsp_study/i2c/i2c_clcd/driver_app/i2c_clcd_dev.mod
