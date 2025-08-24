@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: GPL-2.0
 #include <linux/module.h>
 #include <linux/i2c.h>
 #include <linux/miscdevice.h>
@@ -6,7 +5,7 @@
 #include <linux/delay.h>
 #include <linux/uaccess.h>
 #include <linux/of.h>
-#include <linux/fs.h> // for noop_llseek
+#include <linux/fs.h> 
 
 #define CLCD_IOC_MAGIC 'L'
 #define CLCD_IOC_CLEAR   _IO(CLCD_IOC_MAGIC, 0)
@@ -69,10 +68,10 @@ static void lcd_init(struct clcd *l)
     write4(l, 0x3, 0); udelay(150);
     write4(l, 0x3, 0); udelay(150);
     write4(l, 0x2, 0);
-    lcd_cmd(l, 0x28);  /* 4-bit, 2 line, 5x8 */
-    lcd_cmd(l, 0x0C);  /* display on */
-    lcd_cmd(l, 0x06);  /* entry mode */
-    lcd_cmd(l, 0x01); msleep(2); /* clear(>=1.52ms) */
+    lcd_cmd(l, 0x28);  
+    lcd_cmd(l, 0x0C);  
+    lcd_cmd(l, 0x06);  
+    lcd_cmd(l, 0x01); msleep(2);
 }
 
 static ssize_t clcd_write(struct file *f, const char __user *ubuf,
@@ -122,7 +121,7 @@ static const struct file_operations clcd_fops = {
     .llseek = noop_llseek,
 };
 
-// 커널 6.12+ 버전에 맞는 시그니처 - 두 번째 매개변수 제거
+
 static int clcd_probe(struct i2c_client *client)
 {
     struct clcd *l = devm_kzalloc(&client->dev, sizeof(*l), GFP_KERNEL);
@@ -178,7 +177,6 @@ static int clcd_probe(struct i2c_client *client)
     return 0;
 }
 
-// 커널 6.12+ 버전에 맞는 시그니처 - void 반환형
 static void clcd_remove(struct i2c_client *client)
 {
     struct clcd *l = i2c_get_clientdata(client);
@@ -207,4 +205,5 @@ static struct i2c_driver clcd_drv = {
 module_i2c_driver(clcd_drv);
 
 MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Jeong")
 MODULE_DESCRIPTION("HD44780 over PCF8574");
