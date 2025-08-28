@@ -19,7 +19,7 @@
                 d5-bit = <5>;
                 d6-bit = <6>;
                 d7-bit = <7>;
-                bl-bit = <3>;   // (혹은 4, 실제 모듈과 맞게)
+                bl-bit = <3>;
                 bl-active-high;
             };
         };
